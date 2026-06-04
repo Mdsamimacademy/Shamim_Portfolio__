@@ -1,0 +1,268 @@
+{
+  "entities": {
+    "Admin": {
+      "title": "Admin credentials document",
+      "description": "Unique admin credentials with SHA-256 password hash.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "passwordHash": { "type": "string" },
+        "registeredAt": { "type": "string" }
+      },
+      "required": ["email", "passwordHash"]
+    },
+    "Profile": {
+      "title": "Profile banner details",
+      "description": "User header metadata details.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "title": { "type": "string" },
+        "intro": { "type": "string" },
+        "profilePhoto": { "type": "string" },
+        "heroBgStyle": { "type": "string", "enum": ["galaxy", "particles", "geometric", "matrix"] },
+        "github": { "type": "string" },
+        "linkedin": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" }
+      },
+      "required": ["name", "title", "intro"]
+    },
+    "About": {
+      "title": "Biography page details",
+      "description": "User biography narrative and location.",
+      "type": "object",
+      "properties": {
+        "biography": { "type": "string" },
+        "summary": { "type": "string" },
+        "avatarUrl": { "type": "string" },
+        "location": { "type": "string" }
+      },
+      "required": ["biography", "summary"]
+    },
+    "Skill": {
+      "title": "Skill nodes",
+      "description": "A single tech stacks skill entry.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" }
+      },
+      "required": ["id", "name", "category"]
+    },
+    "SkillCategory": {
+      "title": "Skill Category",
+      "description": "A group defining multiple equivalent skills.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    },
+    "Project": {
+      "title": "Project portfolio showcase card",
+      "description": "Representing a single full-stack, ML or UI project.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "techStack": { "type": "array" },
+        "githubLink": { "type": "string" },
+        "liveLink": { "type": "string" },
+        "image": { "type": "string" },
+        "featured": { "type": "boolean" }
+      },
+      "required": ["id", "name", "description", "techStack"]
+    },
+    "Research": {
+      "title": "Highlighted thesis research",
+      "description": "A high-intensity final year or custom ML thesis overview.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "techStack": { "type": "array" },
+        "reportLink": { "type": "string" },
+        "githubLink": { "type": "string" },
+        "liveLink": { "type": "string" },
+        "image": { "type": "string" }
+      },
+      "required": ["id", "title", "description"]
+    },
+    "Experience": {
+      "title": "Professional Experience Timeline Item",
+      "description": "Company work history record.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string" },
+        "company": { "type": "string" },
+        "duration": { "type": "string" },
+        "logo": { "type": "string" },
+        "bulletPoints": { "type": "array" }
+      },
+      "required": ["id", "role", "company", "duration"]
+    },
+    "Course": {
+      "title": "Authored course item",
+      "description": "Representing an educational curriculum bootcamp tutorial.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "courseLink": { "type": "string" },
+        "thumbnail": { "type": "string" },
+        "category": { "type": "string" }
+      },
+      "required": ["id", "title", "courseLink"]
+    },
+    "Service": {
+      "title": "Offered development service",
+      "description": "Representing freelancing/consultancy offering specifications.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "icon": { "type": "string" },
+        "pricing": { "type": "string" }
+      },
+      "required": ["id", "title", "description", "icon"]
+    },
+    "Certification": {
+      "title": "Earned certification record",
+      "description": "Representing industry/course credential certificates.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "issuer": { "type": "string" },
+        "year": { "type": "string" },
+        "link": { "type": "string" },
+        "image": { "type": "string" }
+      },
+      "required": ["id", "title", "issuer", "year"]
+    },
+    "Education": {
+      "title": "Academic education summary",
+      "description": "Representing schools, cgpa achievements.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "degree": { "type": "string" },
+        "school": { "type": "string" },
+        "duration": { "type": "string" },
+        "cgpa": { "type": "string" },
+        "coursework": { "type": "array" }
+      },
+      "required": ["id", "degree", "school"]
+    },
+    "ContactMessage": {
+      "title": "Inbound contact form message",
+      "description": "Visitor contact submission.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "subject", "message"]
+    },
+    "CvFile": {
+      "title": "Uploaded Curriculum Vitae Resume file",
+      "description": "Stores current resume file information.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fileName": { "type": "string" },
+        "fileData": { "type": "string" },
+        "uploadedAt": { "type": "string" }
+      },
+      "required": ["id", "fileName", "fileData"]
+    },
+    "WebsiteSettings": {
+      "title": "General configuration parameters",
+      "description": "Theme coloring, title, custom branding overrides.",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string" },
+        "logoText": { "type": "string" },
+        "themeColor": { "type": "string" },
+        "footerText": { "type": "string" },
+        "seoTitle": { "type": "string" },
+        "seoDescription": { "type": "string" }
+      },
+      "required": ["siteName", "logoText"]
+    }
+  },
+  "firestore": {
+    "/settings/admin": {
+      "schema": "Admin",
+      "description": "Root admin credentials collection"
+    },
+    "/portfolio/profile": {
+      "schema": "Profile",
+      "description": "Profile settings details singleton"
+    },
+    "/portfolio/about": {
+      "schema": "About",
+      "description": "Biography details singleton"
+    },
+    "/portfolio/research": {
+      "schema": "Research",
+      "description": "Highlighted ML thesis research details singleton"
+    },
+    "/portfolio/cv": {
+      "schema": "CvFile",
+      "description": "Current PDF base64 file"
+    },
+    "/portfolio/settings": {
+      "schema": "WebsiteSettings",
+      "description": "Website custom UI details singleton"
+    },
+    "/skills/{skillId}": {
+      "schema": "Skill",
+      "description": "Interactive system skill metrics"
+    },
+    "/skillCategories/{catId}": {
+      "schema": "SkillCategory",
+      "description": "Interactive layout categorization tags"
+    },
+    "/projects/{projId}": {
+      "schema": "Project",
+      "description": "Showcase projects and portfolios"
+    },
+    "/experience/{expId}": {
+      "schema": "Experience",
+      "description": "Work history list elements"
+    },
+    "/courses/{courseId}": {
+      "schema": "Course",
+      "description": "Camp, tutorial and bootcamps list"
+    },
+    "/services/{srvId}": {
+      "schema": "Service",
+      "description": "Freelancing development/research services offered"
+    },
+    "/certifications/{certId}": {
+      "schema": "Certification",
+      "description": "Earned certificates lists"
+    },
+    "/education/{eduId}": {
+      "schema": "Education",
+      "description": "Schools and collegiate degrees"
+    },
+    "/messages/{msgId}": {
+      "schema": "ContactMessage",
+      "description": "Contact form mailbox queue entries"
+    }
+  }
+}

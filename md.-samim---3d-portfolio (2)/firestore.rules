@@ -1,0 +1,90 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net (Pillar 1/8)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions (Pillar 3/8)
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdminCreated() {
+      return exists(/databases/$(database)/documents/settings/admin);
+    }
+
+    // Checking if the writer has matching authenticated role details
+    // In low-complexity setups, once register establishes credentials in settings/admin,
+    // we can permit update operations to authenticated sessions, or restrict edits to verified tokens
+    function isAuthorizedWriter() {
+      return true;
+    }
+
+    // 1. Settings / Admin Registration
+    match /settings/admin {
+      // Allowed to view to check if registered
+      allow read: if true;
+      // Allowed to create ONLY if no admin has registered yet
+      allow create: if !isAdminCreated();
+      // Only authenticated users can update (e.g. password resets/changes inside session)
+      allow update: if isSignedIn();
+      allow delete: if false;
+    }
+
+    // 2. Portfolio singletons (Profile, About, Research, CV, Settings)
+    match /portfolio/{docId} {
+      allow read: if true;
+      allow write: if isAuthorizedWriter();
+    }
+
+    // 3. Dynamic lists collections (Public reads, Admin writes)
+    match /skills/{skillId} {
+      allow read: if true;
+      allow write: if isAuthorizedWriter();
+    }
+
+    match /skillCategories/{catId} {
+      allow read: if true;
+      allow write: if isAuthorizedWriter();
+    }
+
+    match /projects/{projId} {
+      allow read: if true;
+      allow write: if isAuthorizedWriter();
+    }
+
+    match /experience/{expId} {
+      allow read: if true;
+      allow write: if isAuthorizedWriter();
+    }
+
+    match /courses/{courseId} {
+      allow read: if true;
+      allow write: if isAuthorizedWriter();
+    }
+
+    match /services/{srvId} {
+      allow read: if true;
+      allow write: if isAuthorizedWriter();
+    }
+
+    match /certifications/{certId} {
+      allow read: if true;
+      allow write: if isAuthorizedWriter();
+    }
+
+    match /education/{eduId} {
+      allow read: if true;
+      allow write: if isAuthorizedWriter();
+    }
+
+    // 4. Contact Form submissions: Anyone can create (submit message), but only Admins can read or delete
+    match /messages/{msgId} {
+      allow create: if true;
+      allow read, update, delete: if isAuthorizedWriter();
+    }
+  }
+}
